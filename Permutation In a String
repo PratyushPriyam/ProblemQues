@@ -1,0 +1,63 @@
+/* package codechef; // don't place package name! */
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+public class Main
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+      // your code goes here
+        Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		for(int j=0; j<n; j++) {
+			String str2 = sc.next();
+		String str1 = sc.next();
+        int sum2 = 0;
+		String ans = "False";
+        // Finding integer summation of str2;
+        for(int i=0; i<str2.length(); i++) {
+            sum2 += (int)str2.charAt(i);
+        }
+        // 1st window in str1;
+        int sum1 = 0;
+        for(int i=0; i<str2.length(); i++) {
+            sum1 += (int)str1.charAt(i);
+        }
+        if(sum1 == sum2) {
+            System.out.println("True");
+        }
+
+        // Other windows
+        for(int i=str2.length(); i<str1.length(); i++) {
+            sum1 = sum1+(int)str1.charAt(i)-(int)str1.charAt(i-str2.length());
+            if(sum1 == sum2) {
+                String subString = str1.substring(i, i+str2.length());
+                if(foundPermutation(subString, str2)) {
+					ans = "True";
+                }
+            }
+        }
+        System.out.println(ans);
+		}
+    }
+
+    public static boolean foundPermutation(String subString, String str) {
+        Map<String, Long> mapSubString = new HashMap<String, Long>();
+        Map<String, Long> mapStr = new HashMap<String, Long>();
+        for(int i=0; i<subString.length(); i++) {
+            String ch = subString.charAt(i)+"";
+            mapSubString.merge(ch, 1L, Long::sum);
+        }
+        for(int i=0; i<str.length(); i++) {
+            String ch = str.charAt(i)+"";
+            mapStr.merge(ch, 1L, Long::sum);
+        }
+        if(mapSubString.equals(mapStr)) {
+
+            return true;
+        }
+        return false;
+	}
+}
