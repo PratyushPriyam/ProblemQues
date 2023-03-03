@@ -1,0 +1,38 @@
+/* package codechef; // don't place package name! */
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+public class Main
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        // your code goes here
+        Scanner sc = new Scanner(System.in);
+        int testCases = sc.nextInt();
+        for(int j=0; j< testCases;j++) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for(int i=0; i<n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            int cen = (int)Math.floor(n/3);
+            Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+            for(int i : arr) {
+                map.merge(i, 1, Integer::sum);
+            }
+            List<Integer> list = new ArrayList<>();
+            for(Map.Entry<Integer, Integer> mapElement: map.entrySet()) {
+                if(mapElement.getValue() > cen) {
+                    list.add(mapElement.getKey());
+                }
+            }
+            Collections.sort(list);
+            for(int i=0; i<list.size(); i++) {
+                System.out.print(list.get(i) + " ");
+            }
+            System.out.println();
+        }
+    }
+}
