@@ -1,0 +1,40 @@
+/* package codechef; // don't place package name! */
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+public class Main
+{
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        // your code goes here
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] arr = new int[n];
+		for(int i=0; i<n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		int num = 0;
+		ArrayList<Integer> list = new ArrayList<>();
+		boolean flag = true;
+		while(flag) {
+			if(notPresent(arr[num], list) == false) {
+				flag = false;
+				break;
+			}
+			list.add(arr[num]);
+			num = arr[num];
+		}
+		// System.out.println(list);
+		System.out.println(list.size());
+    }
+	public static boolean notPresent(int num, ArrayList<Integer> arr) {
+		for(int i=0; i<arr.size(); i++) {
+			if(arr.get(i) == num) {
+				return false;
+			}
+		}
+		return true;
+	}
+}
